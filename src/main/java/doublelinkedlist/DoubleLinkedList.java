@@ -5,12 +5,12 @@ public class DoubleLinkedList {
     Node back;
     int size;
 
-    public DoubleLinkedList(){
+    public DoubleLinkedList() {
         head = null;
         back = null;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return head == null;
     }
 
@@ -19,9 +19,9 @@ public class DoubleLinkedList {
         size++;
         newAll.id = size;
         newAll.val = obj;
-        if (isEmpty()){
+        if (isEmpty()) {
             head = newAll;
-        }else {
+        } else {
             back.next = newAll;
         }
         newAll.prev = back;
@@ -69,9 +69,50 @@ public class DoubleLinkedList {
         System.out.println();
     }
 
-    public void printListBack(){
+    public void swap(Node node)
+    {
+        Node prev = node.prev;
+        node.prev = node.next;
+        node.next = prev;
+    }
+
+    public void reverse()
+    {
+        System.out.printf("%n/////   REVERSE    /////%n");
+        Node prev = null;
+        Node curr = head;
+        while (curr != null)
+        {
+            swap(curr);
+            prev = curr;
+            curr = curr.prev;
+        }
+        if (prev != null) {
+            head = prev;
+        }
+        //end reverse
+        printListAll();
+        //return old list
+        System.out.printf("/////   CANSEL REVERSE    /////%n %n");
+        prev = null;
+        curr = head;
+        while (curr != null)
+        {
+            swap(curr);
+            prev = curr;
+            curr = curr.prev;
+        }
+        if (prev != null) {
+            head = prev;
+        }
+    }
+
+    public void printListBack() {
+        if (isEmpty()){
+            return;
+        }
         Node currNode = back;
-        System.out.print("Print list - ");
+        System.out.print("Print list Back- ");
         while (currNode != null) {
             System.out.printf(" id %s - [ %s ]   ", currNode.id, currNode.val);
             currNode = currNode.prev;
@@ -80,6 +121,9 @@ public class DoubleLinkedList {
     }
 
     public void printUnitById(int id) {
+        if (isEmpty()){
+            return;
+        }
         Node currNode = head;
         while (currNode != null) {
             if (currNode.id == id) {
